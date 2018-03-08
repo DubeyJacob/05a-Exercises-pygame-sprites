@@ -45,8 +45,15 @@ def main():
 	clock = pygame.time.Clock()
 
 	blocks = pygame.sprite.Group()
-	block = Block(red,(50,50),(200,200),(5,1))
-	blocks.add(block)
+	spritenum = random.randrange(20)
+	while spritenum > 0:
+		randomcolor = (random.randrange(255),random.randrange(255),random.randrange(255))
+		randomposition = (random.randrange(screen_size[0]),random.randrange(screen_size[1]))
+		randomdirection = (random.randrange(10),random.randrange(10))
+		randomsize = (random.randrange(50),random.randrange(50))
+		block = Block(randomcolor,randomsize,randomposition,randomdirection)
+		blocks.add(block)
+		spritenum -= 1
 
 	while True:
 		clock.tick(FPS)

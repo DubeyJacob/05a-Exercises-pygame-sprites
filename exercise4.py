@@ -29,10 +29,12 @@ class Block(pygame.sprite.Sprite):
 		self.rect = pygame.Rect((self.margin_x,self.margin_y,self.width,self.height))
 		self.image = pygame.Surface(self.rect.size).convert()
 		self.image.blit(self.sheet, (0,0), self.rect)	#from the sheet, grab the correct image
-		#self.image.set_colorkey(green)
+		self.image.set_colorkey(green)
 		
 		(self.rect.x,self.rect.y) = position
 		self.direction = direction
+
+		self.slime = []
 
 	def update(self):
 		(dx,dy) = self.direction
@@ -48,19 +50,22 @@ class Block(pygame.sprite.Sprite):
 		if self.rect.bottom < 0:
 			self.rect.top = HEIGHT
 
-
 def main():
 	pygame.init()
 	screen = pygame.display.set_mode(screen_size)
 	clock = pygame.time.Clock()
 
 	blocks = pygame.sprite.Group()
-	block = Block('sprite_sheet.png',(200,200),(5,1))
+	block = Block('slime-Sheet.png',(200,200),(5,1))
 	blocks.add(block)
+
+	sent = 0
 
 	while True:
 		clock.tick(FPS)
 		screen.fill(black)
+
+		sent += 1
 
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
